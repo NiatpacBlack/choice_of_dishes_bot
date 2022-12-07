@@ -1,11 +1,13 @@
-from pprint import pprint
+import os
 
 import firebase_admin
+from dotenv import load_dotenv
 from firebase_admin import credentials
 from firebase_admin import firestore
 
-from bot_app import os
-from exceptions import CollectionArgumentError, NoProductNameError, CollectionArgumentTypeError
+from exceptions import CollectionArgumentError, CollectionArgumentTypeError
+
+load_dotenv()
 
 
 class FirestoreClient:
@@ -136,6 +138,4 @@ class FirestoreClient:
 
 if __name__ == '__main__':
     firestore_client = FirestoreClient()
-
-
-
+    print([doc.id for doc in firestore_client.get_all_documents_from_collection(collection_name='menu')])
